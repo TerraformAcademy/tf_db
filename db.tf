@@ -3,10 +3,19 @@ terraform {
     azurerm =  "~> 2.33"
     random = "~> 2.2"
   }
+  backend "azurerm" {
+    storage_account_name = var.state_storage_account_name
+    container_name = var.state_storage_container_name
+    key = "tst.terraform.tfstate"
+    access_key = var.storagekey
 }
 
 provider "azurerm" {
   features {}
+  client_id = var.client_id
+  client_secret = var.client_secret
+  subscription_id = var.subscription_id
+  tenant_id = var.tenant_id
 }
 
 variable "region" {
